@@ -8,33 +8,34 @@ class App extends React.Component{
   constructor(){
     super();
     this.state = {
-      listItem : [],
-      key : []
-    };
-    this.updateList = this.updateList.bind(this);
+      listItem : [
+        {
+          id: 1,
+          title: 'complete this tutorial',
+          completed: 'false'
+        },
+        {
+          id: 2,
+          title: 'wake up on time',
+          completed: 'false'
+        }
+      ]};
+
   }
 
-  updateList(updateState){
+  updateList = (updateState) => {
 
-    //this.setState({test : updateState});
-    this.setState(prevState => ({
-      listItem : [...prevState.listItem, updateState.userInput]
-    }) );
-    this.setState(prevState => ({
-      key : [...prevState.key, updateState.idCounter]
-    }));
-
-
+    console.log('debug ' + updateState.userInput);
+    //finding an unique id. First must search through the listitem to see which
+    //ids are already taken
+    const values = Object.values(this.state.listItem);
+    console.log('what am i doing ');
   }
 
 
 
   render(){
 
-    // const listString = this.state.listItem;
-    // const listItems = listString.map((item) =>
-    //     <li>{item}</li>
-    // );
 
     return(
       <div>

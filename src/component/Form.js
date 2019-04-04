@@ -6,23 +6,21 @@ class Form extends React.Component{
     super();
     this.state = {
       userInput : '',
-      idCounter : 0
+      uniqueID : 0
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(e){
-    //callback to the parent and gives the whole entire state information
-    this.props.submit(this.state);
+  handleSubmit = (e) => {
     this.setState(prevState => ({
-      idCounter : prevState.idCounter + 1
+      uniqueID : prevState.uniqueID + 1
     }));
+    //callback to the parent component
+    this.props.submit(this.state);
     e.preventDefault();
   }
 
-  handleChange(e){
+  handleChange = (e) => {
     this.setState({userInput : e.target.value});
 
   }
