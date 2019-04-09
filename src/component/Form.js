@@ -5,18 +5,17 @@ class Form extends React.Component{
   constructor(){
     super();
     this.state = {
-      userInput : '',
-      uniqueID : 0
+      userInput : ''
     }
 
   }
 
   handleSubmit = (e) => {
-    this.setState(prevState => ({
-      uniqueID : prevState.uniqueID + 1
-    }));
     //callback to the parent component
-    this.props.submit(this.state);
+    if(this.state.userInput !== ''){
+      this.props.submit(this.state);
+      this.setState({userInput : ''});
+    }
     e.preventDefault();
   }
 
@@ -29,7 +28,7 @@ class Form extends React.Component{
     return(
       <form onSubmit = {this.handleSubmit} onChange = {this.handleChange}
           >
-        <input type = 'text' />
+        <input type = 'text' value = {this.state.userInput} onChange = {this.handleChange}/>
       </form>
     );
   }

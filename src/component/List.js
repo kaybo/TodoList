@@ -8,12 +8,13 @@ class List extends React.Component{
 
   }
 
-  handleClick = () => {
-    console.log('working!');
+  handleClick = (e) => {
+    console.log(e.target.id);
+    this.props.submit(e.target.id);
   }
 
   handleChange = () => {
-    console.log('checkbox is working');
+    //console.log('checkbox is working');
   }
 
   handleDelete = () => {
@@ -23,10 +24,14 @@ class List extends React.Component{
   render(){
 
     const listArr = this.props.keyList.listItem;
-    const listItems = listArr.map((items) =>
-      <li onClick = {this.handleClick} key = {items.id}>
-        <input type = "checkbox" checked = {false} onChange = {this.handleChange}/>{items.title}
-      </li>
+    const listItems = listArr.map((items) => {
+      return(
+        <li onClick = {this.handleClick} key = {items.id} id = {items.id}>
+          <input type = "checkbox" checked = {false} onChange = {this.handleChange}/>{items.title}
+        </li>
+      )
+    }
+
     );
 
 

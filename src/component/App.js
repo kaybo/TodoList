@@ -8,18 +8,8 @@ class App extends React.Component{
   constructor(){
     super();
     this.state = {
-      listItem : [
-        {
-          id: 1,
-          title: 'complete this tutorial',
-          completed: 'false'
-        },
-        {
-          id: 2,
-          title: 'wake up on time',
-          completed: 'false'
-        }
-      ]};
+      counterID : 0,
+      listItem : []};
 
   }
 
@@ -28,10 +18,60 @@ class App extends React.Component{
     console.log('debug ' + updateState.userInput);
     //finding an unique id. First must search through the listitem to see which
     //ids are already taken
-    const values = Object.values(this.state.listItem);
-    console.log('what am i doing ');
+    // const values = Object.values(this.state.listItem);
+    let newUniqueIDFlag = this.state.counterID;
+    // let tempVar1 ;
+    // let tempVar2;
+    // let displacement;
+    // let tempFlag = 0;
+    // if(this.state.listItem.length > 1){
+    //   for(let i = 0 ; i < this.state.listItem.length - 1 ; i++){
+    //     tempVar1 = this.state.listItem[i].id;
+    //     tempVar2 = this.state.listItem[i+1].id;
+    //     displacement = tempVar2 - tempVar1;
+    //     if(displacement > 1){
+    //       newUniqueIDFlag = tempVar1 + 1;
+    //       tempFlag = 1;
+    //       break;
+    //     }
+    //   }
+    //   if(tempFlag === 0){
+    //       newUniqueIDFlag = tempVar2 + 1;
+    //   }
+    //   console.log('this is newUniqueIDFlag ' + newUniqueIDFlag);
+    //   console.log('current state: ' + this.state.listItem.);
+    // }else if (this.state.listItem.length === 1){
+    //   newUniqueIDFlag = 2;
+    // }else{
+    //   newUniqueIDFlag = 1;
+    // }
+
+    this.setState({
+      counterID: this.state.counterID + 1
+    },() => {
+      let newObjectItem = {
+        id: newUniqueIDFlag,
+        title: updateState.userInput,
+        completed: 'false' };
+        this.setState(prevState => ({
+          listItem: [...prevState.listItem, newObjectItem]
+        }));
+    });
   }
 
+  deleteList = (deleteItem) => {
+    console.log('this is deleted item: ' + deleteItem);
+    for(let i = 0 ; i < this.state.listItem.length ; i++){
+      console.log('looping: ' + this.state.listItem[i].id);
+      if(deleteItem == this.state.listItem[i].id){
+        let convertNumber = this.state.listItem[i].id;
+        let newListItem = this.state.listItem.filter(function(items){
+          return items.id !== convertNumber
+        });
+        this.setState({listItem: newListItem});
+      }
+    }
+  }
 
 
   render(){
@@ -40,7 +80,7 @@ class App extends React.Component{
     return(
       <div>
         <Form submit = {this.updateList} />
-        <List keyList = {this.state}/>
+        <List keyList = {this.state} submit = {this.deleteList}/>
 
       </div>
     );
