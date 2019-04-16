@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from './Form';
 import List from './List';
-
+import {Button, Container, Row, Col} from 'react-bootstrap';
 
 class App extends React.Component{
 
@@ -79,9 +79,20 @@ class App extends React.Component{
 
     return(
       <div>
-        <Form submit = {this.updateList} />
-        <List keyList = {this.state} submit = {this.deleteList}/>
+        <Container>
 
+          <h1  className = 'text-center display-1 text-white' >Todos</h1>
+          <Row >
+            <Col sm = {12}>
+              <Form  submit = {this.updateList} />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm = {12}>
+              <List keyList = {this.state} submit = {this.deleteList}/>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }

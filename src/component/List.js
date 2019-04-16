@@ -1,4 +1,5 @@
 import React from 'react';
+import ListGroup from 'react-bootstrap/ListGroup'
 
 class List extends React.Component{
 
@@ -9,8 +10,8 @@ class List extends React.Component{
   }
 
   handleClick = (e) => {
-    console.log(e.target.id);
-    this.props.submit(e.target.id);
+    //console.dir('this is handle click from onclick: ' + e.target.getAttribute('idkey'));
+    this.props.submit(e.target.getAttribute('idkey'));
   }
 
   handleChange = () => {
@@ -26,9 +27,10 @@ class List extends React.Component{
     const listArr = this.props.keyList.listItem;
     const listItems = listArr.map((items) => {
       return(
-        <li onClick = {this.handleClick} key = {items.id} id = {items.id}>
-          <input type = "checkbox" checked = {false} onChange = {this.handleChange}/>{items.title}
-        </li>
+        <ListGroup.Item variant = 'info' as = 'li'
+        onClick = {this.handleClick} key = {items.id} idkey = {items.id}>
+          {items.title}
+        </ListGroup.Item>
       )
     }
 
@@ -39,9 +41,9 @@ class List extends React.Component{
 
     //console.log('testing ' + this.props.items);
     return(
-      <div>
-        <ul>{listItems}</ul>
-      </div>
+      <ListGroup as = 'ul'>
+        <ListGroup>{listItems}</ListGroup>
+      </ListGroup>
 
     );
   }
